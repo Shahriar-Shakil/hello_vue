@@ -13,4 +13,7 @@ export const bookStore = reactive({
   getBook(id) {
     return this.books.find((p) => p.id === id);
   },
+  deleteBook(id) {
+    this.books = this.books.filter((b) => b.id !== id);
+  },
 });
