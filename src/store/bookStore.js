@@ -1,19 +1,25 @@
-import { reactive } from "vue";
+import { defineStore } from "pinia";
 
-export const bookStore = reactive({
-  books: [],
-  addBook(book) {
-    book.id = Date.now().toString();
-    this.books.push(book);
+export const useBookStore = defineStore("bookStore", {
+  state: () => ({
+    books: [],
+  }),
+  actions: {
+    addBook(book) {
+      book.id = Date.now().toString();
+      this.books.push(book);
+    },
+    updateBook(id, newData) {
+      const index = this.books.findIndex((b) => b.id === id);
+      if (index !== -1) this.books[index] = { ...newData, id };
+    },
+    getBook(id) {
+      return this.books.find((b) => b.id === id);
+    },
+    deleteBook(id) {
+      const index = this.books.findIndex((b) => b.id === id);
+      if (index !== -1) this.books.splice(index, 1);
+    },
   },
-  updateBook(id, newData) {
-    const index = this.books.findIndex((p) => p.id === id);
-    if (index !== -1) this.books[index] = { ...newData, id };
-  },
-  getBook(id) {
-    return this.books.find((p) => p.id === id);
-  },
-  deleteBook(id) {
-    this.books = this.books.filter((b) => b.id !== id);
-  },
+  persist: true,
 });

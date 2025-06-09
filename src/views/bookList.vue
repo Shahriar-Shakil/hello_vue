@@ -45,7 +45,8 @@
 </template>
 
 <script setup>
-import { bookStore as store } from "../store/bookStore";
+import { useBookStore } from "../store/bookStore";
+const store = useBookStore();
 
 function handleDelete(id) {
   store.deleteBook(id);

@@ -64,8 +64,9 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { bookStore as store } from "../store/bookStore";
+import { useBookStore } from "../store/bookStore";
 
+const store = useBookStore();
 const route = useRoute();
 const router = useRouter();
 
